@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+/* Imports */
+import { useState, createContext } from "react";
+import Nav from "./Components/Nav";
+import Slab from "./Components/Slab";
+import ModalBox from "./Components/Modal";
 
-function App() {
+export const todoContext = createContext(null);
+
+
+function TodoApp() {
+  /*
+   * Main App Component
+   */
+
+  const data = JSON.parse(localStorage.getItem("todos"));
+  const init = data ? data : [];
+
+  const [todos, setTodos] = useState(init);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <todoContext.Provider value={{ todos, setTodos }} >
+      <Nav />
+      {
+        todos.map(todo => {
+          return (
+            <Slab key={ todo.id } todo={ todo } />
+          );
+        })
+      }
+      <ModalBox />
+    </todoContext.Provider>
   );
 }
 
-export default App;
+
+export default TodoApp;

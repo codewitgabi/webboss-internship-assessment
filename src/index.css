@@ -1,13 +1,148 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --red: #ff0000;
+  --blue: #0554f2;
+  --green: #71b390;
+  --white: #fff;
+}
+body {
+  font-family: Helvetica;
+  max-width: 700px;
+  margin: 1em auto;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* === Nav === */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2em;
+}
+.logo {
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+#add-task-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.8em 1em;
+  background: var(--blue);
+  border-radius: 5px;
+  border: 2px solid var(--white);
+  color: var(--white);
+}
+
+@media (max-width: 768px) {
+  body {
+    max-width: 100%;
+    margin: 1em;
+  }
+}
+
+/* === Slab === */
+.slab {
+  box-shadow: hsl(0, 0%, 90%) 0 0 5px;
+  border-radius: 8px;
+  padding: 1em;
+  margin: 1em 0;
+  position: relative;
+}
+.title {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 0.6em;
+  text-transform: capitalize;
+}
+.detail {
+  font-weight: 300;
+  font-size: 0.8rem;
+  margin-bottom: 0.4em;
+}
+.status {
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
+  margin-top: 0.8em;
+}
+.status span {
+  font-size: 0.6rem;
+  font-weight: 400;
+}
+.cancel-btn {
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* === Modal === */
+.modal {
+  box-shadow: hsl(0, 0%, 90%) 0 0 10px;
+  background: var(--white);
+  border-radius: 10px;
+  backdrop-filter: blur(100px);
+  width: 400px;
+  padding: 1.2em;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  z-index: 9999;
+}
+.modal form label {
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+.modal form input,
+.modal form textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  outline: none;
+  font-weight: 400;
+  background: var(--white);
+  display: inline-block;
+  margin: 1em 0;
+}
+.modal form input:focus,
+.modal form textarea:focus {
+  border: 1px solid var(--blue);
+}
+#add-form-btn {
+  display: inline-block;
+  margin-top: 1em;
+  width: 100%;
+  padding: 12px 0;
+  background: var(--blue);
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: var(--white);
+}
+.required {
+  color: var(--red);
+}
+
+@media (max-width: 768px) {
+  .modal {
+    width: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* === Others === */
+.hide {
+  display: none;
+}
+.show {
+  display: block;
 }
