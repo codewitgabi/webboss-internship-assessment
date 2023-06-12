@@ -1,5 +1,5 @@
 /* Imports */
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import Nav from "./Components/Nav";
 import Slab from "./Components/Slab";
 import ModalBox from "./Components/Modal";
@@ -12,10 +12,15 @@ function TodoApp() {
    * Main App Component
    */
 
-  const data = JSON.parse(localStorage.getItem("todos"));
-  const init = data ? data : [];
+  const [todos, setTodos] = useState([]);
 
-  const [todos, setTodos] = useState(init);
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem("todos"))
+    const init = items ? items : [];
+
+    setTodos(init)
+  }, []);
+
 
   return (
     <todoContext.Provider value={{ todos, setTodos }} >

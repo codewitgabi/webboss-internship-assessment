@@ -10,6 +10,7 @@ function ModalBox() {
 
   const { todos, setTodos } = useContext(todoContext);
 
+
   const removeModal = () => {
     document.getElementById("modal").classList.add("hide");
     document.getElementById("todo-form").reset();
@@ -24,16 +25,10 @@ function ModalBox() {
     const description = form.description.value;
     const id = Date.now();
     
-    const newTodo = [...todos];
-    newTodo.push({
-      id,
-      title,
-      description,
-      completed: false
-    });
+    const newTodo = [...todos, {id, title, description, completed: false}];
 
-    localStorage.setItem("todos", JSON.stringify(newTodo));
     setTodos(newTodo);
+    localStorage.setItem("todos", JSON.stringify(newTodo));
 
     form.reset();
   };
