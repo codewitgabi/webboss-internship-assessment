@@ -1,5 +1,5 @@
 /* Imports */
-import { useState, useContext} from "react";
+import { useContext} from "react";
 import CancelBtn from "./CancelButton";
 import { todoContext } from "../App";
 
@@ -9,11 +9,18 @@ function Slab({ todo }) {
    * Todo task display component
    */
 
-  const [todoStatus, setTodoStatus] = useState(false);
   const { todos, setTodos } = useContext(todoContext);
 
   const setStatus = (e) => {
-    setTodoStatus(e.target.checked);
+    const newTodo = todos.filter(td => {
+      if (td.id === todo.id) {
+        td.completed = e.target.checked;
+      }
+      return td;
+    });
+
+    localStorage.setItem("todos", JSON.stringify(newTodo));
+    setTodos(newTodo);
   };
 
   const removeSlab = () => {
@@ -28,8 +35,8 @@ function Slab({ todo }) {
       <legend className="title">{ todo.title }</legend>
       <p className="detail">{ todo.description }</p>
       <div className="status">
-        <input type="checkbox" onClick={ setStatus } />
-        <span>{ todoStatus ? "COMPLETED" : "NOT COMPLETED" }</span>
+        <input type="checkbox" onClick={ setStatus } checked={ todo.completed } />
+        <span>{ todo.completed ? "COMPLETED" : "NOT COMPLETED" }</span>
       </div>
       <CancelBtn clickHandler={ removeSlab } />
     </div>
